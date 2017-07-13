@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Sistema de Controle do Distribuidor de Ração</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="80" resizable="false" closable="true" collapsible="false">
+                    <h1 align="center"><font color="white">SISTEMA DE CONTROLE DO DISTRIBUIDOR DE RAÇÃO</font></h1>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="80" closable="true" collapsible="false">
+                    <div align="center" style="color: white;">
+<!--                        <h3 align="center">System development to the project of Estagio II</h3>-->
+                        <h3 align="center">Sistema desenvolvido no Estagio Curricular II</h3>
+                        <h:outputText value="@copyright William Carpeggiani Martins de Quadros" />
+
+                        <h:outputLabel value="@#{dateConvertMBean.formatYear}" />
+
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="200" header="Show" collapsible="true">
+                    <ui:insert name="menu">   
+                        <!--                    <p:menu>
+                                            <p:submenu label="Resources">
+                                                <p:menitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                                                <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                                                <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                                                <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+                    
+                                            </p:submenu>
+                                            </p:menu>-->
+                        <h:form>
+
+                        </h:form>
+
+                    </ui:insert>
+
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <ui:insert name="content">
+
+                    </ui:insert>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

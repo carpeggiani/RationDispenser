@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Gerenciar Dispositivo - Distribuidor de Ração</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <ui:composition template="mainUser.xhtml">
+                <ui:define name="content">
+
+                    <p:panel header="Gerenciar Dispositivos" style="width: 1800px; text-align: left; float: left">
+                        <h:form id="form">
+                            <p:growl id="msgs" showDetail="true"/>
+                            <p:dataTable 
+                                id="tblDevice"
+                                value="#{deviceMBean.listDevices}" var="d" 
+                                emptyMessage="No one register found..."
+                                widgetVar="deviceTable"                                     
+                                rowKey="#{d.id_device}" selectionMode="single"                                
+                                paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+                                filteredValue="#{deviceMBean.filteredDevices}"
+                                editable="true"
+                                >
+
+                                <f:facet name="header">    
+                                    <div style="text-align: left;">
+
+                                        <p:outputPanel>
+                                            <h:outputText value="Pesquisa:" />
+                                            <p:inputText id="globalFilter" onkeyup="PF('deviceTable').filter()" style="width:150px" placeholder="Digite..."/>
+                                        </p:outputPanel>
+
+
+                                    </div>
+                                </f:facet>
+
+                                <p:columnGroup type="header">
+                                    <p:row>
+                                        <p:column rowspan="2" headerText="Cód" style="text-align: center; width: 20px" 
+                                                  filterBy="#{d.id_device}" filterStyle="display: none" />                                
+                                        <p:column footerText="contains" filterMatchMode="contains" rowspan="2" headerText="Nome" style="text-align: center; width: 100px" 
+                                                  filterBy="#{d.name}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Serial" style="text-align: center; width: 60px " 
+                                                  filterBy="#{d.serial}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Criado" style="text-align: center; width: 60px" 
+                                                  filterBy="#{d.dateCreate}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Modity" style="text-align: center; width: 60px" 
+                                                  filterBy="#{d.dateModify}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Status" style="text-align: center; width: 50px" 
+                                                  filterBy="#{d.statusConnection}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Sinal" style="text-align: center; width: 30px" 
+                                                  filterBy="#{d.sign}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Creditos" style="text-align: center; width: 30px" 
+                                                  filterBy="#{d.credits}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Sensor Silo" style="text-align: center; width: 40px" 
+                                                  filterBy="#{d.sensorSilo}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Sensor Prato" style="text-align: center; width: 40px" 
+                                                  filterBy="#{d.sensorDish}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Usuário" style="text-align: center; width: 50px" 
+                                                  filterBy="#{d.user.name}" filterStyle="display: none" />
+                                        <p:column colspan="3" headerText="Ações" style="text-align: center; width: 300px"/>
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column headerText="Atualizar" style="text-align: center; font-style: italic; width: 1px" />
+                                        <p:column headerText="Deletar" style="text-align: center; font-style: italic; width: 1px" />
+                                        <p:column headerText="Gerenciar" style="text-align: center; font-style: italic; width: 1px" />
+                                    </p:row>
+                                </p:columnGroup>
+
+                                <p:column style="text-align: center; width: 20px">
+                                    <h:outputLabel value="#{d.id_device}" />
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{d.name}" />
+                                </p:column>             
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{d.serial}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{d.dateCreate}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{d.dateModify}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{d.statusConnection}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{d.sign}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{d.credits}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{d.sensorSilo}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{d.sensorDish}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{d.user.name}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center; width: 1px">
+
+                                    <p:commandButton value="Atualizar" title="Atualizar Dispositivo" icon="ui-icon-change" onclick="PF('dialogUpdate').show();" update=":formUpdateDialog" process="@this" >
+                                        <f:setPropertyActionListener target="#{deviceMBean.addNewReg}" value="false" />
+                                        <f:setPropertyActionListener target="#{deviceMBean.device}" value="#{d}" />
+                                    </p:commandButton>  
+
+                                </p:column>                                 
+
+                                <p:column style="text-align: center; width: 1px">
+
+                                    <p:commandButton value="Excluir" title="Deletar Dispositivo" icon="ui-icon-trash" action="#{deviceMBean.deleteDevice()}" update=":form">
+                                        <f:setPropertyActionListener target="#{deviceMBean.device}" value="#{d}" />
+                                        <p:confirm header="Confirmation" message="Quer realmente excluir?" icon="ui-icon-alert" />
+                                    </p:commandButton>
+
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update=":form" process="@this"/>
+                                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>
+
+                                </p:column>
+
+                                <p:column style="text-align: center; width: 1px">
+
+                                    <!--                                    <p:commandButton value="Controll" title="Controll Device" icon="ui-icon-change" onclick="PF('dialogUpdate').show();" update=":formUpdateDialog" process="@this" >
+                                                                            <f:setPropertyActionListener target="#{deviceMBean.addNewReg}" value="false" />
+                                                                            <f:setPropertyActionListener target="#{deviceMBean.device}" value="#{d}" />
+                                                                        </p:commandButton>  -->
+
+                                    <p:commandButton value="Gerenciar" title="Gerenciar Dispositivo" icon="ui-icon-transferthick-e-w" action="controllDevice.xhtml?faces-redirect=true" >
+
+                                    </p:commandButton>
+
+                                </p:column> 
+
+                            </p:dataTable>
+
+                            <p:commandButton value="Novo Dispositivo" title="Create New Device" icon="ui-icon-newwin" onclick="PF('dialogUpdate').show();" update=":formUpdateDialog" process="@this" >
+                                <f:setPropertyActionListener target="#{deviceMBean.addNewReg}" value="true" />
+                                <f:setPropertyActionListener
+                                    target="#{deviceMBean.device}"
+                                    value="#{d}" />
+                            </p:commandButton>
+
+                        </h:form>
+
+
+                        <p:dialog widgetVar="dialogUpdate" resizable="false" header="UpdateDevice"
+                                  modal="true" appendTo="@(body)"> 
+
+                            <h:form id="formUpdateDialog">
+                                <h:panelGrid columns="3" style="margin-bottom:10px">
+
+                                    <p:outputLabel for="id_device" value="Code:" />
+                                    <p:inputText id="id_device" value="#{deviceMBean.device.id_device}" disabled="true" size="5"/>
+                                    <p:message for="id_device" display="text"/> 
+
+                                    <p:outputLabel for="name" value="Name:" />
+                                    <p:inputText id="name" value="#{deviceMBean.device.name}" 
+                                                 required="true" requiredMessage="Valor inválido." size="35" maxlength="100"/>
+                                    <p:message for="name" display="text" /> 
+
+                                    <p:outputLabel for="serial" value="Serial:" />                                    
+                                    <p:inputText id="serial" value="#{deviceMBean.device.serial}" 
+                                                 required="true" requiredMessage="Valor inválido." size="20" maxlength="50"/>
+                                    <p:message for="serial" display="text"/>      
+
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2">
+                                    <p:commandButton value="Save" icon="ui-icon-check" actionListener="#{deviceMBean.save()}" oncomplete="dialogUpdate').hide()" update=":form">
+                                    </p:commandButton>
+                                    <p:commandButton value="Cancel" onclick="PF('dialogUpdate').hide();" icon="ui-icon-close"/>
+                                </h:panelGrid>
+                            </h:form>
+                        </p:dialog>
+
+
+                    </p:panel>
+                </ui:define> 
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+

@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Create User - Ration Dispenser</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <ui:composition template="mainAdmin.xhtml">
+                <ui:define name="content">
+
+                    <p:panel header="Manage Users" style="width: 1800px; text-align: left; float: left">
+                        <h:form id="form">
+                            <p:growl id="msgs" showDetail="true"/>
+                            <p:dataTable 
+                                id="tblUser"
+                                value="#{userMBean.getAllUsers()}" var="u" 
+                                emptyMessage="No one register found..."
+                                widgetVar="userTable"                                     
+                                rowKey="#{u.id}" selectionMode="single"                                
+                                paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+                                filteredValue="#{userMBean.filteredUsers}"
+                                editable="true"
+                                >
+
+                                <f:facet name="header">    
+                                    <div style="text-align: left;">
+                                        <p:outputPanel>
+                                            <h:outputText value="Search all fields:" />
+                                            <p:inputText id="globalFilter" onkeyup="PF('userTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                        </p:outputPanel>
+                                    </div>
+                                </f:facet>
+
+                                <p:columnGroup type="header">
+                                    <p:row>
+                                        <p:column rowspan="2" headerText="Code" style="text-align: left; width: 25px" 
+                                                  filterBy="#{u.id}" filterStyle="display: none" />                                
+                                        <p:column footerText="contains" filterMatchMode="contains" rowspan="2" headerText="Name" style="text-align: left" 
+                                                  filterBy="#{u.name}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Username" style="text-align: left; width: 80px " 
+                                                  filterBy="#{u.username}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Password" style="text-align: left; width: 80px" 
+                                                  filterBy="#{u.password}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="CPF" style="text-align: left; width: 90px" 
+                                                  filterBy="#{u.cpf}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Address" style="text-align: left; width: 100px" 
+                                                  filterBy="#{u.address}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Number" style="text-align: left; width: 50px" 
+                                                  filterBy="#{u.number}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Neighborhood" style="text-align: left; width: 80px" 
+                                                  filterBy="#{u.neighborhood}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="City" style="text-align: left; width: 80px" 
+                                                  filterBy="#{u.city}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="UF" style="text-align: left; width: 20px" 
+                                                  filterBy="#{u.uf}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Fone" style="text-align: left; width: 60px" 
+                                                  filterBy="#{u.fone}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="E-mail" style="text-align: left; width: 160px" 
+                                                  filterBy="#{u.email}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Access" style="text-align: left; width: 35px" 
+                                                  filterBy="#{u.accessLevel}" filterStyle="display: none" />
+                                        <p:column colspan="2" headerText="Actions" />
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column headerText="Update" style="text-align: center; font-style: italic; width: 1px" />
+                                        <p:column headerText="Delete" style="text-align: center; font-style: italic; width: 1px" />
+                                    </p:row>
+                                </p:columnGroup>
+
+                                <p:column style="text-align: center; width: 20px">
+                                    <h:outputLabel value="#{u.id}" />
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.name}" />
+                                </p:column>             
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.username}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.password}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.cpf}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.address}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.number}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.neighborhood}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.city}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.uf}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.fone}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.email}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{u.accessLevel}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center; width: 1px">
+
+<!--                                    <p:commandButton action="#{userMBean.changeUser()}" icon="ui-icon-change" value="Update" title="Update User" update="@form" process="@this" >
+                                        <f:setPropertyActionListener
+                                            target="#{userMBean.user}"
+                                            value="#{u}" />
+                                    </p:commandButton>                             -->
+<!--                                    <p:commandButton value="Update" icon="ui-icon-change" actionListener="#{userMBean.updateUser}">
+                                        <p:ajax event="dialogReturn" listener="#{dfView.onCarChosen}" update="msgs" />
+                                    </p:commandButton>-->
+
+                                    <p:commandButton value="Update" title="Update User" icon="ui-icon-change" onclick="PF('dialogUpdate').show();" update=":formUpdateDialog" process="@this" >
+                                        <f:setPropertyActionListener
+                                            target="#{userMBean.user}"
+                                            value="#{u}" />
+                                    </p:commandButton>  
+
+                                </p:column>                                 
+
+                                <p:column style="text-align: center; width: 1px">
+
+
+<!--                                    <p:commandButton action="#{userMBean.deleteUser()}" icon="ui-icon-trash" value="Delete" title="Delete user" update=":form" process="@this" >
+                                        <f:setPropertyActionListener
+                                            target="#{userMBean.user}"
+                                            value="#{u}" />
+                                    </p:commandButton>-->
+
+                                    <p:commandButton value="Delete" icon="ui-icon-trash" action="#{userMBean.deleteUser()}" update=":form">
+                                        <f:setPropertyActionListener
+                                            target="#{userMBean.user}"
+                                            value="#{u}" />
+                                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                                    </p:commandButton>
+
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update=":form" process="@this"/>
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>
+
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </h:form>
+
+
+
+
+
+                        <p:dialog widgetVar="dialogUpdate" resizable="false" header="UpdateUser"
+                                  modal="true" appendTo="@(body)"> 
+
+                            <h:form id="formUpdateDialog">
+                                <h:panelGrid columns="3" style="margin-bottom:10px">
+
+                                    <p:outputLabel for="id_user" value="Code:" />
+                                    <p:inputText id="id_user" value="#{userMBean.user.id}" disabled="true" size="5"/>
+                                    <p:message for="id_user" display="text"/> 
+
+                                    <p:outputLabel for="name" value="Name:" />
+                                    <p:inputText id="name" value="#{userMBean.user.name}" 
+                                                 required="true" requiredMessage="Valor inválido." size="35" maxlength="100"/>
+                                    <p:message for="name" display="text" /> 
+
+                                    <p:outputLabel for="username" value="Username:" />                                    
+                                    <p:inputText id="username" value="#{userMBean.user.username}" 
+                                                 required="true" requiredMessage="Valor inválido." size="35" maxlength="50"/>
+                                    <p:message for="username" display="text"/>      
+
+                                    <p:outputLabel for="password" value="Password:" />
+                                    <p:inputText id="dateCreate" value="#{userMBean.user.password}" 
+                                                 required="true" requiredMessage="Valor inválido." maxlength="20"/>
+                                    <p:message for="password" display="text"/> 
+
+                                    <p:outputLabel for="cpf" value="CPF:" />
+                                    <p:inputMask id="cpf" value="#{userMBean.user.cpf}" mask="999.999.999-99"
+                                                 required="true" requiredMessage="Valor inválido." size="35" maxlength="15"/>
+                                    <p:message for="cpf" display="text"/>
+
+                                    <p:outputLabel for="address" value="Address:" />
+                                    <p:inputText id="address" value="#{userMBean.user.address}"
+                                                 required="true" requiredMessage="Valor inválido" size="35" maxlength="100" />
+                                    <p:message for="address" display="text"/>
+
+                                    <p:outputLabel for="number" value="Number:" />
+                                    <p:inputText id="number" value="#{userMBean.user.number}" 
+                                                 required="true" requiredMessage="Valor inválido." size="35" maxlength="10"/>
+                                    <p:message for="number" display="text"/>
+
+                                    <p:outputLabel for="neighborhood" value="Neightborhood:" />
+                                    <p:inputText id="neighborhood" value="#{userMBean.user.neighborhood}"
+                                                 required="true" requiredMessage="Valor inválido" size="35" maxlength="50" />
+                                    <p:message for="neighborhood" display="text"/>
+
+                                    <p:outputLabel for="city" value="City:" />
+                                    <p:inputText id="city" value="#{userMBean.user.city}" 
+                                                 required="true" requiredMessage="Valor inválido." size="35" maxlength="100"/>
+                                    <p:message for="city" display="text"/>
+
+                                    <p:outputLabel for="uf" value="UF:" />
+                                    <p:inputText id="uf" value="#{userMBean.user.uf}" 
+                                                 required="true" requiredMessage="Valor inválido." size="35" maxlength="2"/>
+                                    <p:message for="uf" display="text"/>
+
+                                    <p:outputLabel for="fone" value="Fone:" />
+                                    <p:inputMask id="fone" value="#{userMBean.user.cpf}" mask="(99)9-9999-9999"
+                                                 required="true" requiredMessage="Valor inválido." size="35" maxlength="15"/>
+                                    <p:message for="fone" display="text"/>
+
+                                    <p:outputLabel for="endereco" value="Email:" />
+                                    <p:inputText id="endereco" value="#{userMBean.user.email}" 
+                                                 required="true" requiredMessage="Valor inválido." size="35" maxlength="100"/>
+                                    <p:message for="endereco" display="text"/>
+
+                                    <p:outputLabel for="access" value="Access:" />
+                                    <p:selectOneMenu id="access" value="#{userMBean.user.accessLevel}" style="width: 180px" >
+                                        <f:selectItem itemLabel="Admin" itemValue="1"/>
+                                        <f:selectItem itemLabel="User" itemValue="2"/>
+                                    </p:selectOneMenu>
+
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2">
+                                    <p:commandButton value="Save" action="#{userMBean.save()}"/>
+                                    <p:commandButton value="Cancel" onclick="PF('dialogUpdate').hide();" />
+                                </h:panelGrid>
+                            </h:form>
+                        </p:dialog>
+
+
+                    </p:panel>
+                </ui:define> 
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+

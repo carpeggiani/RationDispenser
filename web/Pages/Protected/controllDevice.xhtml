@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Controle do Dispositivo - Distribuidor de Ração</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <ui:composition template="mainUser.xhtml">
+                <ui:define name="content">
+
+                    <p:panel header="Controle do Dispositivo" style="width: 1100px; text-align: left; float: left">
+                        <h:form id="form">
+                            <p:growl id="msgs" showDetail="true"/>
+                            <p:dataTable 
+                                id="tblRegister"
+                                value="#{controlDeviceMBean.listRegister}" var="r" 
+                                emptyMessage="Não há nenhum registro..."
+                                widgetVar="controllTable"                                     
+                                rowKey="#{r.id_reg}" selectionMode="single"                                
+                                paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+                                filteredValue="#{controlDeviceMBean.filteredRegisters}"
+                                editable="true"
+                                >
+
+                                <f:facet name="header">    
+                                    <div style="text-align: left;">
+
+
+
+                                        <p:outputPanel>
+                                            <h:outputText value="Pesquisar:" />
+                                            <p:inputText id="globalFilter" onkeyup="PF('controllTable').filter()" style="width:150px" placeholder="Digite..."/>
+                                        </p:outputPanel>
+
+
+                                    </div>
+                                </f:facet>
+
+                                <p:columnGroup type="header">
+                                    <p:row>
+                                        <p:column rowspan="2" headerText="Cod" style="text-align: center; width: 20px" 
+                                                  filterBy="#{r.id_reg}" filterStyle="display: none" />                                
+                                        <p:column footerText="contains" filterMatchMode="contains" rowspan="2" headerText="Device" style="text-align: center; width: 50px" 
+                                                  filterBy="#{r.device.name}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Status" style="text-align: center; width: 50px " 
+                                                  filterBy="#{r.statusFeeding}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="Data" style="text-align: center; width: 50px" 
+                                                  filterBy="#{r.date}" filterStyle="display: none" />
+                                        <p:column rowspan="2" headerText="IP" style="text-align: center; width: 50px" 
+                                                  filterBy="#{r.ip}" filterStyle="display: none" />
+                                    </p:row>
+
+                                    
+                                </p:columnGroup>
+
+                                <p:column style="text-align: center; width: 20px">
+                                    <h:outputLabel value="#{r.id_reg}" />
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{r.device.name}" />
+                                </p:column>             
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{r.statusFeeding}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{r.date}" />                    
+                                </p:column>
+
+                                <p:column style="text-align: center">
+                                    <h:outputLabel value="#{r.ip}" />                    
+                                </p:column>
+
+
+                            </p:dataTable>
+
+                            <p:commandButton value="Alimentar" title="Alimentar dispositivo" icon="ui-icon-trash" action="#{controlDeviceMBean.changeDevice()}" update=":form">
+                                <f:setPropertyActionListener target="#{controlDeviceMBean.register}" value="#{r}" />
+                                <p:confirm header="Confirmation" message="Você quer alimentar seu dispositivo?" icon="ui-icon-alert" />
+                            </p:commandButton>
+
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update=":form" process="@this"/>
+                                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+
+                        </h:form>
+
+                    </p:panel>
+                </ui:define> 
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+

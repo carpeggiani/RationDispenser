@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Ration Dispenser Control System</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <ui:composition template="../Layout/layout.xhtml">
+                <ui:define name="menu">
+                    <h:form>
+                        <p:menu>
+                            <p:submenu label="Menu">
+                                <p:menuitem value="Login" action="login.xhtml?faces-redirect=true" />
+<!--                                <p:menuitem value="javascript:void(0)" onclick="PF('dlg').show();" title="Login" />-->
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+
+                </ui:define>
+                <ui:define name="content">
+
+<!--                    <ui:include src="login.xhtml"></ui:include>-->
+
+                </ui:define> 
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+
